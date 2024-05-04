@@ -24,12 +24,15 @@
 	<link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/daterangepicker/daterangepicker.css">
 
 	<link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/summernote/summernote-bs4.min.css">
+	<link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+	<link rel="stylesheet" href="https://adminlte.io/themes/v3/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 	<div class="wrapper">
 
 		<div class="preloader flex-column justify-content-center align-items-center">
-			<img class="animation__shake" src="https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+			<img class="animation__shake" src="{{ asset('logo.jpg') }}" alt="AdminLTELogo" height="60" width="60">
 		</div>
 
 		<nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -39,7 +42,7 @@
 					<a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
 				</li>
 				<li class="nav-item d-none d-sm-inline-block">
-					<a href="index3.html" class="nav-link">Home</a>
+					<a href="{{ route('user.dashboard') }}" class="nav-link">Home</a>
 				</li>
 			</ul>
 
@@ -104,7 +107,7 @@
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
 
 			<a href="index3.html" class="brand-link">
-				<img src="https://adminlte.io/themes/v3/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+				<img src="{{ asset('logo.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
 				<span class="brand-text font-weight-light">Siak</span>
 			</a>
 
@@ -115,7 +118,7 @@
 						<img src="https://adminlte.io/themes/v3/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
 					</div>
 					<div class="info">
-						<a href="#" class="d-block">Alexander Pierce</a>
+						<a href="#" class="d-block">Rafli Al Musthofa Pambagio</a>
 					</div>
 				</div>
 
@@ -133,28 +136,42 @@
 				<nav class="mt-2">
 					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 						<li class="nav-item">
-							<a href="https://adminlte.io/docs/3.1/" class="nav-link">
+							<a href="{{ route('user.dashboard') }}" class="nav-link {{ request()->routeIs('user.dashboard') ? 'active' : '' }}">
 								<i class="nav-icon fas fa-file"></i>
 								<p>Home</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="https://adminlte.io/docs/3.1/" class="nav-link">
+							<a href="{{ route('user.academic') }}" class="nav-link {{ request()->routeIs('user.academic') ? 'active' : '' }}">
 								<i class="nav-icon fas fa-file"></i>
 								<p>Akademik</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="https://adminlte.io/docs/3.1/" class="nav-link">
+							<a href="{{ route('user.payment') }}" class="nav-link {{ request()->routeIs('user.payment') ? 'active' : '' }}">
 								<i class="nav-icon fas fa-file"></i>
 								<p>Pembayaran UKT/SPP</p>
 							</a>
 						</li>
-						<li class="nav-item">
-							<a href="https://adminlte.io/docs/3.1/" class="nav-link">
-								<i class="nav-icon fas fa-file"></i>
-								<p>Personal</p>
+						<li class="nav-item {{ request()->routeIs(['user.profile', 'user.change-password']) ? 'menu-open' : '' }}">
+							<a href="#" class="nav-link {{ request()->routeIs(['user.profile', 'user.change-password']) ? 'active' : '' }}">
+								<i class="nav-icon fas fa-tachometer-alt"></i>
+								<p>Setting <i class="right fas fa-angle-left"></i></p>
 							</a>
+							<ul class="nav nav-treeview">
+								<li class="nav-item">
+									<a href="{{ route('user.profile') }}" class="nav-link {{ request()->routeIs('user.profile') ? 'active' : '' }}">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Profil</p>
+									</a>
+								</li>
+								<li class="nav-item">
+									<a href="{{ route('user.change-password') }}" class="nav-link {{ request()->routeIs('user.change-password') ? 'active' : '' }}">
+										<i class="far fa-circle nav-icon"></i>
+										<p>Ubah Password</p>
+									</a>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</nav>
@@ -211,5 +228,17 @@
 	<script src="https://adminlte.io/themes/v3/dist/js/adminlte.js?v=3.2.0"></script>
 
 	<script src="https://adminlte.io/themes/v3/dist/js/pages/dashboard.js"></script>
+
+	<script src="https://adminlte.io/themes/v3/plugins/datatables/jquery.dataTables.min.js"></script>
+	<script src="https://adminlte.io/themes/v3/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+	<script src="https://adminlte.io/themes/v3/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+	<script src="https://adminlte.io/themes/v3/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+	<script src="https://adminlte.io/themes/v3/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+	<script src="https://adminlte.io/themes/v3/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+	<script src="https://adminlte.io/themes/v3/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+	<script src="https://adminlte.io/themes/v3/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+	<script src="https://adminlte.io/themes/v3/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+	@yield("script")
 </body>
 </html>

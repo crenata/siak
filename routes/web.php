@@ -17,8 +17,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/user/dashboard', function () {
-    return view('user.dashboard');
+Route::prefix('user')->group(function () {
+    Route::get('dashboard', function () {
+        return view('user.dashboard');
+    })->name("user.dashboard");
+    Route::get('academic', function () {
+        return view('user.academic');
+    })->name("user.academic");
+    Route::get('payment', function () {
+        return view('user.payment');
+    })->name("user.payment");
+    Route::get('profile', function () {
+        return view('user.profile');
+    })->name("user.profile");
+    Route::get('change-password', function () {
+        return view('user.change-password');
+    })->name("user.change-password");
 });
 
 Route::get('/dashboard', function () {
